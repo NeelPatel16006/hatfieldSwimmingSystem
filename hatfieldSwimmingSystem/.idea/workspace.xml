@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10fa109f-7e42-45a3-8ff4-9086a97ce0b8" name="Changes" comment="" />
+    <list default="true" id="10fa109f-7e42-45a3-8ff4-9086a97ce0b8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HatfeildSwimmingBookingSystem.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Lesson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/SwimmingBookingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/SwimmingBookingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bin/org/example/Lesson.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bin/org/example/Lesson.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bin/org/example/SwimmingBookingSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bin/org/example/SwimmingBookingSystem.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,17 +28,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.SwimmingBookingSystem.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/pneel/Downloads/THJSS/THJSS",
-    "onboarding.tips.debug.path": "D:/hatfieldSwimmingSystem/hatfieldSwimmingSystem/src/main/java/org/example/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.SwimmingBookingSystem.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/hatfieldSwimmingSystem/hatfieldSwimmingSystem&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/hatfieldSwimmingSystem/hatfieldSwimmingSystem/src/main/java/org/example/Main.java&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
