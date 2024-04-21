@@ -210,6 +210,81 @@ public class SwimmingBookingSystem {
     /**
      * Books a lesson for a learner, ensuring it matches their grade level and also learner ID.
      */
+//    private void bookLesson(){
+//        System.out.println("Select an option:");
+//        System.out.println("1. Display timetable by day");
+//        System.out.println("2. Display timetable by grade");
+//        System.out.println("3. Display timetable by coach");
+//        System.out.println("Enter Your Choice:");
+//        int option = scanner.nextInt();
+//        scanner.nextLine(); // Consume newline
+//        switch (option){
+//            case 1 -> {
+//                displayAvaiableDaysAndTimeSlots();
+//                System.out.println("Enter Day: ");
+//                String day = scanner.nextLine();
+//                displayTimetableByDay(day);
+//                break;
+//            }
+//            case 2 -> {
+//                System.out.println("Enter GradeLevel: ");
+//                int grade = scanner.nextInt();
+//                scanner.nextLine(); // Consume newline
+//                displayTimetableByGrade(grade);
+//                break;
+//            }
+//            case 3 -> {
+//                displayAvailableCoaches();
+//                System.out.println("Enter Coach's Name: ");
+//                String coachName = scanner.nextLine();
+//                displayTimetableByCoach(coachName);
+//                break;
+//            }
+//            default -> System.out.println("Invalid option. Please try again.");
+//        }
+//        System.out.println("Enter Learner ID: ");
+//        int id = scanner.nextInt();
+//        Learner learner = learners.stream().filter(l -> l.getLearnerID() == id).findFirst().orElse(null);
+//
+//        if (learner == null) {
+//            System.out.println("Learner not found.");
+//            return;
+//        }
+//
+//        System.out.print("Enter lesson ID: ");
+//        int lessonId = scanner.nextInt();
+//        scanner.nextLine(); // Consume newline
+//        // Find the grade level of the lesson
+//        int lessonGradeLevel = findGradeLevelByLessonId(lessonId);
+//
+//        if (lessonGradeLevel == -1) {
+//            System.out.println("Lesson not found.");
+//            return;
+//        }
+//
+//        // Check if the lesson ID is already booked by the learner
+//        if (learner.getBookedLessons().stream().anyMatch(lesson -> lesson.getLessonID() == lessonId)) {
+//            System.out.println("You have already booked this lesson. Please choose another lesson.");
+//            return;
+//        }
+//
+//        // Check if the learner's grade level allows booking this lesson
+//        if (learner.getGradeLevel() == lessonGradeLevel || learner.getGradeLevel() + 1 == lessonGradeLevel) {
+//            Optional<Lesson> optionalLesson = lessons.stream().filter(l ->l.getLessonID() == lessonId).findFirst();
+//
+//            if (optionalLesson.isPresent()) {
+//                Lesson lesson = optionalLesson.get();
+//                lesson.bookLesson(learner);
+//                learner.bookLesson(lesson);
+//                System.out.println("Lesson booked successfully.");
+//            } else {
+//                System.out.println("Failed to book the lesson. Please check the details and try again.");
+//            }
+//        } else {
+//            System.out.println("You are not allowed to book this lesson based on your grade level.");
+//        }
+//
+//    }
     private void bookLesson(){
         System.out.println("Select an option:");
         System.out.println("1. Display timetable by day");
@@ -255,37 +330,41 @@ public class SwimmingBookingSystem {
         int lessonId = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        // Find the grade level of the lesson
-        int lessonGradeLevel = findGradeLevelByLessonId(lessonId);
+        // Find the lesson
+        Optional<Lesson> optionalLesson = lessons.stream().filter(l -> l.getLessonID() == lessonId).findFirst();
 
-        if (lessonGradeLevel == -1) {
+        if (!optionalLesson.isPresent()) {
             System.out.println("Lesson not found.");
             return;
         }
 
+        Lesson lesson = optionalLesson.get();
+
+        // Check if the lesson is already fully booked
+        if (lesson.getLearners().size() >= 4) {
+            System.out.println("This lesson is fully booked. Please choose another lesson.");
+            return;
+        }
+
         // Check if the lesson ID is already booked by the learner
-        if (learner.getBookedLessons().stream().anyMatch(lesson -> lesson.getLessonID() == lessonId)) {
+        if (learner.getBookedLessons().stream().anyMatch(l -> l.getLessonID() == lessonId)) {
             System.out.println("You have already booked this lesson. Please choose another lesson.");
             return;
         }
 
         // Check if the learner's grade level allows booking this lesson
-        if (learner.getGradeLevel() == lessonGradeLevel || learner.getGradeLevel() + 1 == lessonGradeLevel) {
-            Optional<Lesson> optionalLesson = lessons.stream().filter(l ->l.getLessonID() == lessonId).findFirst();
-
-            if (optionalLesson.isPresent()) {
-                Lesson lesson = optionalLesson.get();
-                lesson.bookLesson(learner);
-                learner.bookLesson(lesson);
-                System.out.println("Lesson booked successfully.");
-            } else {
-                System.out.println("Failed to book the lesson. Please check the details and try again.");
-            }
-        } else {
+        int lessonGradeLevel = lesson.getGradeLevel();
+        if (learner.getGradeLevel() != lessonGradeLevel && learner.getGradeLevel() + 1 != lessonGradeLevel) {
             System.out.println("You are not allowed to book this lesson based on your grade level.");
+            return;
         }
 
+        // Book the lesson
+        lesson.bookLesson(learner);
+        learner.bookLesson(lesson);
+        System.out.println("Lesson booked successfully.");
     }
+
 
     /**
      * Change or cancle lessons a previously booked lesson for a learner.

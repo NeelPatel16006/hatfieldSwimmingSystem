@@ -48,8 +48,6 @@ public class Lesson {
 
         if (this.learners.size() < 4 && !this.learners.contains(learner) && (learner.getGradeLevel() == this.gradeLevel || learner.getGradeLevel() == maxGradeLevel)) {
             this.learners.add(learner);
-        } else {
-            System.out.println("Failed to book the lesson. Please check the details and try again.");
         }
     }
 
