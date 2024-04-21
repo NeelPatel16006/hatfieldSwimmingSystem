@@ -336,6 +336,37 @@ public class SwimmingBookingSystem {
         Optional<Lesson> oldLesson = findLessonById(oldLessonId);
 
         if (oldLesson.isPresent()) {
+            System.out.println("Select an option:");
+        System.out.println("1. Display timetable by day");
+        System.out.println("2. Display timetable by grade");
+        System.out.println("3. Display timetable by coach");
+        System.out.println("Enter Your Choice:");
+        int option = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        switch (option){
+            case 1 -> {
+                displayAvaiableDaysAndTimeSlots();
+                System.out.println("Enter Day: ");
+                String day = scanner.nextLine();
+                displayTimetableByDay(day);
+                break;
+            }
+            case 2 -> {
+                System.out.println("Enter GradeLevel: ");
+                int grade = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                displayTimetableByGrade(grade);
+                break;
+            }
+            case 3 -> {
+                displayAvailableCoaches();
+                System.out.println("Enter Coach's Name: ");
+                String coachName = scanner.nextLine();
+                displayTimetableByCoach(coachName);
+                break;
+            }
+            default -> System.out.println("Invalid option. Please try again.");
+        }
             // Prompt for new lesson ID
             System.out.println("Enter the new lesson ID:");
             int newLessonId = scanner.nextInt();
