@@ -255,21 +255,34 @@ public class SwimmingBookingSystem {
         int lessonId = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
+        // Find the grade level of the lesson
+        int lessonGradeLevel = findGradeLevelByLessonId(lessonId);
+
+        if (lessonGradeLevel == -1) {
+            System.out.println("Lesson not found.");
+            return;
+        }
+
         // Check if the lesson ID is already booked by the learner
         if (learner.getBookedLessons().stream().anyMatch(lesson -> lesson.getLessonID() == lessonId)) {
             System.out.println("You have already booked this lesson. Please choose another lesson.");
             return;
         }
 
-        Optional<Lesson> optionalLesson = lessons.stream().filter(l ->l.getLessonID() == lessonId).findFirst();
+        // Check if the learner's grade level allows booking this lesson
+        if (learner.getGradeLevel() == lessonGradeLevel || learner.getGradeLevel() + 1 == lessonGradeLevel) {
+            Optional<Lesson> optionalLesson = lessons.stream().filter(l ->l.getLessonID() == lessonId).findFirst();
 
-        if (optionalLesson.isPresent()) {
-            Lesson lesson = optionalLesson.get();
-            lesson.bookLesson(learner);
-            learner.bookLesson(lesson);
-            System.out.println("Lesson booked successfully.");
+            if (optionalLesson.isPresent()) {
+                Lesson lesson = optionalLesson.get();
+                lesson.bookLesson(learner);
+                learner.bookLesson(lesson);
+                System.out.println("Lesson booked successfully.");
+            } else {
+                System.out.println("Failed to book the lesson. Please check the details and try again.");
+            }
         } else {
-            System.out.println("Failed to book the lesson. Please check the details and try again.");
+            System.out.println("You are not allowed to book this lesson based on your grade level.");
         }
 
     }
@@ -519,6 +532,19 @@ public class SwimmingBookingSystem {
             System.out.println("Average Rating: " + coach.getAverageRating());
             System.out.println("------------------------");
         }
+    }
+
+    /**
+     * Finds the grade level of a lesson by its ID.
+     * @param lessonId The ID of the lesson to find the grade level for.
+     * @return The grade level of the lesson with the given ID, or -1 if the lesson is not found.
+     */
+    private int findGradeLevelByLessonId(int lessonId) {
+        Optional<Lesson> optionalLesson = lessons.stream()
+                .filter(lesson -> lesson.getLessonID() == lessonId)
+                .findFirst();
+
+        return optionalLesson.map(Lesson::getGradeLevel).orElse(-1);
     }
 
 

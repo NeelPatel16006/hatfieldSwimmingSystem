@@ -44,8 +44,13 @@ public class Lesson {
      * @param learner the learner attempting to book the lesson
      */
     public void bookLesson(Learner learner) {
-        if (this.learners.size() < 4 && !this.learners.contains(learner) && (learner.getGradeLevel() == this.gradeLevel || learner.getGradeLevel() + 1 == this.gradeLevel)) {
+        int maxGradeLevel = this.gradeLevel + 1; // Allow learners up to one level higher
+
+        if (this.learners.size() < 4 && !this.learners.contains(learner) && (learner.getGradeLevel() == this.gradeLevel || learner.getGradeLevel() == maxGradeLevel)) {
             this.learners.add(learner);
+            System.out.println("Lesson booked successfully.");
+        } else {
+            System.out.println("Failed to book the lesson. Please check the details and try again.");
         }
     }
 
